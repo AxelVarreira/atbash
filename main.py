@@ -1,16 +1,17 @@
 # This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import sys, getopt, argparse
+
+from validators import validate_arguments
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+parser = argparse.ArgumentParser()
 
+parser.add_argument("--a", "--Action", help="Actions: decrypt or encrypt file")
+parser.add_argument("--k", "--Key", help="Actions: key to encrypt or decrypt file")
+parser.add_argument("--f", "--File", help="Actions: File to be encrypt or decrypt")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+args = parser.parse_args()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+validate_arguments.validate_arguments(args.k, args.a, args.f)
+
