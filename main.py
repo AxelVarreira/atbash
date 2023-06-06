@@ -1,6 +1,4 @@
-# This is a sample Python script.
-
-import sys, getopt, argparse, blowfish
+import argparse, blowfish
 
 from validators import validate_arguments
 
@@ -14,3 +12,25 @@ parser.add_argument("--f", "--File", help="Actions: File to be encrypt or decryp
 args = parser.parse_args()
 
 validate_arguments.validate_arguments(args.k, args.a, args.f)
+
+
+
+cipher = blowfish.Cipher(b"{args.k}")
+
+match args.a:
+    case "decrypt":
+        with open(args.f, 'rb') as fb:
+            linesBytes = fb.read()
+        decryptedText = cipher.decrypt_block(linesBytes)
+        print(decryptedText.decode("utf-8"))
+
+    case "encrypt":
+        with open(args.f) as f:
+            lines = f.read()
+
+        encondedText = lines.encode('utf-8')
+        cipherText = cipher.encrypt_block(encondedText)
+
+        path = args.f.split(".txt")
+        with open(f"{path[0]}_crypto.txt","xb") as fw:
+            fw.write(cipherText)
