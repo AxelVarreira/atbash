@@ -1,4 +1,5 @@
 import argparse, blowfish
+from os import urandom
 
 from validators import validate_arguments
 
@@ -9,6 +10,7 @@ parser.add_argument("--k", "--Key", help="Actions: key to encrypt or decrypt fil
 parser.add_argument("--f", "--File", help="Actions: File to be encrypt or decrypt")
 
 args = parser.parse_args()
+vector = urandom(8)
 
 validate_arguments.validate_arguments(args.k, args.a, args.f)
 
@@ -18,15 +20,14 @@ match args.a:
     case "decrypt":
         with open(args.f, 'rb') as fb:
             linesBytes = fb.read()
-        decryptedText = cipher.decrypt_block(linesBytes)
-        print(decryptedText.decode("utf-8"))
+        decryptedText = b"".join(cipher.decrypt_cbc(linesBytes, vector))
 
     case "encrypt":
         with open(args.f) as f:
             lines = f.read()
 
-        encondedText = lines.encode('utf-8')
-        cipherText = cipher.encrypt_block(encondedText)
+        encondedText = (lines.encode('utf-8')*8)
+        cipherText = b"".join(cipher.encrypt_cbc(encondedText, vector))
 
         path = args.f.split(".txt")
         with open(f"{path[0]}_crypto.txt", "wb") as fw:
