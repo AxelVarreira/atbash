@@ -1,6 +1,6 @@
 # This is a sample Python script.
 
-import sys, getopt, argparse
+import sys, getopt, argparse, blowfish
 
 from validators import validate_arguments
 
@@ -14,4 +14,3 @@ parser.add_argument("--f", "--File", help="Actions: File to be encrypt or decryp
 args = parser.parse_args()
 
 validate_arguments.validate_arguments(args.k, args.a, args.f)
-
