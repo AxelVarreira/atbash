@@ -6,7 +6,7 @@ A cifra de Atbash tem como proposito a substituição das letras do alfabeto (n)
 
 ### PreRequisites
 
-- Python (on your command line)
+- Python (on your command line or use the idea config that is already there) (tested version: Python 3.11.4)
 - Git
 
 ### Installation
