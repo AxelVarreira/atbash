@@ -1,22 +1,13 @@
 from types import NoneType
 
 
-def validate_arguments(k, a, f):
-    if type(k) is NoneType: raise ValueError('None param was passed')
-    if type(a) is NoneType: raise ValueError("None param was passed")
-    if type(f) is NoneType: raise ValueError("None param was passed")
+def validate_arguments(a, f):
+    if type(a) is NoneType: raise ValueError("No action was passed")
+    if type(f) is NoneType: raise ValueError("No file was passed")
 
     # extension of file verify
     if not f.__contains__(".txt"):
         raise ValueError("Invalid file", f)
-
-    # key verify
-    if k.__contains__(".txt"):
-        raise ValueError("Invalid key", k)
-
-    result = bytearray(k.encode('utf-8'))
-    if len(result) < 4 or len(result) > 56:
-        raise ValueError("The key is invalid", k)
 
     #action verify
     if a != 'encrypt' and a != 'decrypt':
