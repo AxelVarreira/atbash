@@ -19,7 +19,7 @@ class AtbashCipher:
                 findLetraAcentuada = self.pontucao.find(letra)
 
                 # Acha o local da letra inversa
-                localLetra = len(self.pontucao) - findLetraAcentuada
+                localLetra = int(len(self.pontucao)/2) - findLetraAcentuada
 
                 self.cipher += self.pontucao[localLetra]
 
@@ -28,7 +28,7 @@ class AtbashCipher:
                 findLetraAcentuada = string.punctuation.find(letra)
 
                 # Acha o local da letra inversa
-                localLetra = len(string.punctuation) - findLetraAcentuada
+                localLetra = int(len(string.punctuation)/2) - findLetraAcentuada
 
                 self.cipher += string.punctuation[localLetra]
             # Condicao pra ver se a letra é um espaço
